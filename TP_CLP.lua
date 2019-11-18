@@ -1,10 +1,7 @@
 Cartas = {nome, confiabilidade, aprendizado, eficiencia, portabilidade, reusabilidade}
 
-function Cartas:new(nome, confiabilidade, aprendizado, eficiencia, portabilidade, reusabilidade)
+function AtribuirCartas(nome, confiabilidade, aprendizado, eficiencia, portabilidade, reusabilidade)
     card = {}
-
-    setmetatable(card, self)
-    self.__index = self
 
     card.nome = nome
     card.carac = {}
@@ -35,10 +32,13 @@ function CompararValores(valorPlayer, valorComputador)
 end
 
 function ReorganizaMonte(monte)
-    for i,v in ipairs(monte) do
-        print(k,v)
-        classe2[k] = classe2[k + 1] 
+    for i = 1, (#monte-1), 1 do
+        --print(i)
+        monte[i] = monte[i + 1] 
      end
+     monte[#monte] = nil
+     --print(monte[#monte-1])
+     --table.remove(monte,monte[1])
 end
 
 function ColocarFinaldoMonte(monteMesa, monteVencedor)
@@ -58,19 +58,45 @@ supertrunfo2 = false
 monte = {}
 cartas1 = {}
 cartas2 = {}
-cartas1[1] = Cartas:new('Java', 3, 3, 7, 9, 10)
-cartas1[2] = Cartas:new('Python', 8, 0, 7, 9, 0)
-cartas1[3] = Cartas:new('Java1', 3, 7, 5, 3, 1)
-cartas2[1] = Cartas:new('Python1', 4, 0, 0, 3, 0)
-cartas2[2] = Cartas:new('Java2', 3, 8, 6, 1, 8)
-cartas2[3] = Cartas:new('Python2', 8, 3, 7, 4, 2)
 
-print(cartas1[1].carac.confiabilidade)
+cartas1[1] = AtribuirCartas('Java', 3, 3, 7, 9, 10)
+cartas1[2] = AtribuirCartas('C', 3, 3, 7, 9, 10)
+cartas1[3] = AtribuirCartas('Python', 8, 0, 7, 9, 0)
+cartas1[4] = AtribuirCartas('C++', 3, 3, 7, 9, 10)
+cartas1[5] = AtribuirCartas('C#', 3, 3, 7, 9, 10)
+cartas1[6] = AtribuirCartas('Visual Basic .NET', 3, 3, 7, 9, 10)
+cartas1[7] = AtribuirCartas('JavaScript', 3, 3, 7, 9, 10)
+cartas1[8] = AtribuirCartas('PHP', 3, 3, 7, 9, 10)
+cartas1[9] = AtribuirCartas('SQL', 3, 3, 7, 9, 10)
+cartas1[10] = AtribuirCartas('Swift', 3, 3, 7, 9, 10)
+cartas1[11] = AtribuirCartas('Ruby', 3, 3, 7, 9, 10)
+cartas1[12] = AtribuirCartas('Objective-C', 3, 3, 7, 9, 10)
+cartas1[13] = AtribuirCartas('Delphi/Object Pascal', 3, 3, 7, 9, 10)
+cartas1[14] = AtribuirCartas('Groovy', 3, 3, 7, 9, 10)
+cartas1[15] = AtribuirCartas('Assembly language', 3, 3, 7, 9, 10)
+cartas1[16] = AtribuirCartas('R', 3, 3, 7, 9, 10)
+cartas2[1] = AtribuirCartas('Visual Basic', 3, 3, 7, 9, 10)
+cartas2[2] = AtribuirCartas('D', 3, 3, 7, 9, 10)
+cartas2[3] = AtribuirCartas('MATLAB', 3, 3, 7, 9, 10)
+cartas2[4] = AtribuirCartas('Go', 3, 3, 7, 9, 10)
+cartas2[5] = AtribuirCartas('Perl', 3, 3, 7, 9, 10)
+cartas2[6] = AtribuirCartas('SAS', 3, 3, 7, 9, 10)
+cartas2[7] = AtribuirCartas('PL/SQL', 3, 3, 7, 9, 10)
+cartas2[8] = AtribuirCartas('Dart', 3, 3, 7, 9, 10)
+cartas2[9] = AtribuirCartas('Rust', 3, 3, 7, 9, 10)
+cartas2[10] = AtribuirCartas('Scratch', 3, 3, 7, 9, 10)
+cartas2[11] = AtribuirCartas('Lisp', 3, 3, 7, 9, 10)
+cartas2[12] = AtribuirCartas('COBOL', 3, 3, 7, 9, 10)
+cartas2[13] = AtribuirCartas('Fortran', 3, 3, 7, 9, 10)
+cartas2[14] = AtribuirCartas('Scala', 3, 3, 7, 9, 10)
+cartas2[15] = AtribuirCartas('RPG', 3, 3, 7, 9, 10)
+cartas2[16] = AtribuirCartas('Lua', 3, 3, 7, 9, 10)
+
 
 while(jogo) do
     print('Quantidade de cartas')
-    print('Player: ', table.maxn(cartas1))
-    print('Computador: ', table.maxn(cartas2))
+    print('Player: ', #cartas1)
+    print('Computador: ', #cartas2)
     print('Comprar carta. Pressione qualquer tecla')
     
     io.read()
@@ -86,7 +112,7 @@ while(jogo) do
     end
 
     --Menu de Opções
-    print('\nEscolha a caraciterisca que será disputada nesse rodada!')
+    print('\nEscolha a caracterisca que será disputada nesse rodada!')
     print('\n1- Confiabilidade\n2- Aprendizado\n3- Eficiência \n4- Portabilidade \n5- Reusabilidade')
     carac_rodada = io.read('*number')
 
@@ -140,20 +166,20 @@ while(jogo) do
         print('Player ganhou esta rodada')
         ColocarFinaldoMonte(monte, cartas1)
 
-    else if(resultado == 1)
+    elseif(resultado == 1) then
         print('Houve um empate, proxima rodada será de desempate')
 
-    else if(resultado == 2)
+    elseif(resultado == 2) then
         print('Computador ganhou esta rodada')
         ColocarFinaldoMonte(monte, cartas2)
-
-    if (table.maxn(cartas1) == 4) then
+    end
+    print(#cartas1)
+    if (#cartas1 == 32) then
         print('Jogador Venceu!')
         jogo = false
-    elseif (table.maxn(cartas2) == 4) then
+    elseif (#cartas2 == 32) then
         print('Computador Venceu!')
         jogo = false
     end
 end
-
 io.read()
